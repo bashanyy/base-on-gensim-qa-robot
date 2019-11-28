@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>
+</head>
+<body>
+<div class="bb">
+    <div class="cc">
+            <input type="text" name="wenti" id="wenti1">
+            <button id="bbb">确定</button>
+        <div id="cccc">
+
+        </div>
+        <div id="dddd">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $("#bbb").click(function(){
+        var hh=$("#wenti1").val();
+        $("#cccc").text("");
+         $.post("{% url 'api:qaqa' 'v1' %}",{"wenti":hh,"qaid":"1002"},function(data,status){
+             var a=($.parseJSON(data))['data'];
+                $('#cccc').text(a.questions);
+                $('#dddd').text(a.asks);
+        })
+
+    });
+</script>
+<style>
+    .bb{
+        width: 100%;
+    }
+    .cc{
+        width: 1200px;
+        margin:0 auto;
+        margin-top:30px;
+    }
+    #wenti1{
+        width: 400px;
+        height: 30px;
+    }
+    #bbb{
+        width: 80px;
+        height: 26px;
+    }
+</style>
